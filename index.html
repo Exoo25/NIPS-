@@ -641,14 +641,26 @@ window.addEventListener("scroll", () => {
 });
 
 /* Animated Counters */
-function animate(id,target){
-  let count=0;
-  const el=document.getElementById(id);
-  const interval=setInterval(()=>{
-    count+=Math.ceil(target/200);
-    if(count>=target){count=target;clearInterval(interval);}
-    el.innerText=id==="results"?count+"%":count;
-  },20);
+function animate(id, target) {
+    let count = 0;
+    const el = document.getElementById(id);
+    const interval = setInterval(() => {
+        count += Math.ceil(target / 200);
+        if (count >= target) { 
+            count = target; 
+            clearInterval(interval); 
+        }
+
+        // Add "+" only for specific ids (like teachers)
+        if (id === "teachers") {
+            el.innerText = count + "+";
+        } else if (id === "results") {
+            el.innerText = count + "%";
+        } else {
+            el.innerText = count;
+        }
+
+    }, 20);
 }
 window.addEventListener("load",()=>{
   animate("students",201);
